@@ -251,8 +251,8 @@ function renderSet(){
     <b>Synchronizacja z GitHub</b>
     <p class="mut">${c?`Połączono z <b>${c.repo}</b>. ${syncMsg||''}`:'Trening zapisuje się w prywatnym repo na GitHubie, więc dane nie zginą razem z telefonem.'}</p>
     ${c?`<button class="sec" data-act="gh-sync">Synchronizuj teraz</button><button class="sec red" data-act="gh-off">Odłącz GitHub</button>`:
-    `<textarea id="ghrepo" style="height:44px" placeholder="repo z danymi, np. jannowak/trening-dane"></textarea>
-     <textarea id="ghtok" style="height:44px" placeholder="token (github_pat_…)"></textarea>
+    `<textarea id="ghrepo" style="height:44px" placeholder="repo z danymi, np. jannowak/trening-dane" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false"></textarea>
+     <textarea id="ghtok" style="height:44px" placeholder="token (github_pat_…)" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false"></textarea>
      <button class="sec" data-act="gh-save">Połącz i synchronizuj</button>`}
     </div><div class="card">
     <b>Kopia zapasowa</b><p class="mut">Dodatkowa ręczna kopia do schowka (np. wklej do notatek).</p>
@@ -321,7 +321,8 @@ document.addEventListener('click',e=>{
   }
   if(act==='wipe'){ if(confirm('Na pewno usunąć całą historię (także z GitHuba)?')){ sessions.forEach(s=>deleted.push(s.id)); sessions=[]; drafts={}; render(); toast('Usunięto'); sync(); } return; }
   if(act==='gh-save'){
-    const repo=document.getElementById('ghrepo').value.trim(), token=document.getElementById('ghtok').value.trim();
+    const repo=document.getElementById('ghrepo').value.replace(/\s/g,''), token=document.getElementById('ghtok').value.replace(/\s/g,'');
+    if(/^[A-Z]/.test(token)&&/^Github_pat_/.test(token)){ toast('Token zaczyna się od wielkiej litery – popraw na github_pat_'); return; }
     if(!/^[\w.-]+\/[\w.-]+$/.test(repo)||!token){ toast('Podaj repo (nick/nazwa) i token'); return; }
     store.set('tt_gh',{repo,token}); sync(true); return;
   }
