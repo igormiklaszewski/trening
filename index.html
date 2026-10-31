@@ -5,103 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="color-scheme" content="light dark">
 <meta name="apple-mobile-web-app-title" content="Trening">
-<meta name="theme-color" content="#0f1115">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f2f2f7">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
 <title>Trening siłowy</title>
-<style>
-:root{
-  --bg:#0f1115;--card:#181b22;--card2:#20242d;--line:#2b303b;--txt:#eef0f4;--mut:#8b93a3;
-  --acc:#ff7a1a;--ok:#2fbf71;--warn:#f5c542;
-}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.35 -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif}
-body{padding:env(safe-area-inset-top) 0 0;overscroll-behavior-y:none}
-button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-action:manipulation}
-input{font:inherit;color:var(--txt)}
-#app{max-width:560px;margin:0 auto;padding:12px 12px calc(150px + env(safe-area-inset-bottom))}
-h1{font-size:22px;margin:4px 4px 10px}
-.seg{display:flex;background:var(--card);border-radius:12px;padding:4px;gap:4px;margin-bottom:10px}
-.seg button{flex:1;padding:12px 6px;border-radius:9px;font-weight:600;color:var(--mut)}
-.seg button.on{background:var(--acc);color:#111}
-.prog{height:6px;background:var(--card);border-radius:3px;overflow:hidden;margin:2px 2px 12px}
-.prog>i{display:block;height:100%;background:var(--ok);width:0;transition:width .25s}
-.card{background:var(--card);border-radius:16px;padding:12px;margin-bottom:12px}
-.card.grp{border-left:4px solid var(--warn)}
-.hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.hd b{font-size:17px}
-.tgt{color:var(--mut);font-size:14px;white-space:nowrap}
-.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;color:#111;background:var(--warn);border-radius:6px;padding:1px 6px;margin-bottom:4px}
-.sug{margin:6px 0 2px;font-size:14px;color:var(--acc)}
-.last{font-size:13px;color:var(--mut);margin-bottom:6px}
-.cols,.row{display:grid;grid-template-columns:26px 1fr 78px 52px;gap:8px;align-items:center}
-.cols{font-size:12px;color:var(--mut);text-align:center;margin-top:8px}
-.row{margin-top:8px}
-.row .n{color:var(--mut);text-align:center;font-weight:600}
-.wt{display:flex;align-items:center;background:var(--card2);border-radius:12px;overflow:hidden}
-.wt button{width:44px;height:48px;font-size:22px;color:var(--acc)}
-.wt input{flex:1;min-width:0;width:100%;text-align:center;background:none;border:0;height:48px;font-size:19px;font-weight:600}
-.row>input{width:100%;height:48px;text-align:center;background:var(--card2);border:0;border-radius:12px;font-size:19px;font-weight:600}
-.chk{height:48px;border-radius:12px;background:var(--card2);color:var(--mut);font-size:22px;font-weight:700}
-.row.done .chk{background:var(--ok);color:#06210f}
-.row.done input{opacity:.6}
-.tools{display:flex;gap:8px;margin-top:10px}
-.tools button{flex:1;padding:9px;border-radius:10px;background:var(--card2);color:var(--mut);font-size:14px}
-.big{display:block;width:100%;padding:16px;border-radius:14px;background:var(--acc);color:#111;font-weight:700;font-size:18px;margin-top:6px}
-.sec{background:var(--card2);color:var(--txt);padding:13px;border-radius:12px;width:100%;margin-top:8px;font-weight:600}
-.sec.red{color:#ff6b6b}
-.mut{color:var(--mut);font-size:14px}
-.hist .t{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.hist .t button{color:#ff6b6b;font-size:13px;padding:6px}
-.hist .e{font-size:14px;margin-top:6px}
-.hist .e span{color:var(--mut)}
-nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:rgba(24,27,34,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);z-index:5}
-nav button{flex:1;padding:12px 4px 10px;font-size:12px;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:2px}
-nav button .ic{font-size:21px}
-nav button.on{color:var(--acc)}
-#timer{position:fixed;left:10px;right:10px;bottom:calc(64px + env(safe-area-inset-bottom));max-width:540px;margin:0 auto;background:var(--acc);color:#111;border-radius:16px;padding:10px 12px;display:none;align-items:center;gap:8px;z-index:6;box-shadow:0 6px 20px rgba(0,0,0,.5)}
-#timer.on{display:flex}
-#timer .tm{font-size:28px;font-weight:800;flex:1;font-variant-numeric:tabular-nums}
-#timer button{background:rgba(0,0,0,.18);border-radius:10px;padding:10px 12px;font-weight:700}
-#timer.end{background:var(--ok)}
-#toast{position:fixed;top:calc(12px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);background:#fff;color:#111;padding:10px 16px;border-radius:12px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9}
-#toast.on{opacity:1}
-.lastrow{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:2px}
-.lastrow .last{margin:0;flex:1}
-.how{flex:none;background:rgba(255,122,26,.16);color:var(--acc);font-weight:700;font-size:14px;padding:9px 12px;border-radius:10px;white-space:nowrap}
-#gm{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:flex-end;z-index:20}
-#gm.on{display:flex}
-.sheet{width:100%;max-width:560px;margin:0 auto;max-height:92vh;overflow-y:auto;background:var(--bg);border-radius:20px 20px 0 0;padding:14px 14px calc(18px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
-.sh-hd{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
-.sh-hd b{font-size:19px}
-.sh-hd button{width:40px;height:40px;border-radius:20px;background:var(--card2);font-size:18px;flex:none}
-#fig{display:block;width:100%;background:var(--card);border-radius:14px}
-#fig .gfl{stroke:#3a4150;stroke-width:1.5}
-#fig .geq rect,#fig .geq circle{fill:#2b303b;stroke:#4a5160;stroke-width:1}
-#fig .gnr{stroke:#eef0f4;stroke-width:4.5;stroke-linecap:round}
-#fig .gfar{stroke:#7d8596;stroke-width:4;stroke-linecap:round}
-#fig .ghd{fill:#eef0f4}
-#fig .gwt{fill:rgba(255,122,26,.35);stroke:#ff7a1a;stroke-width:2}
-#fig .gcb{stroke:#8b93a3;stroke-width:1.5;stroke-dasharray:3 3}
-.cap{color:var(--mut);font-size:14px;text-align:center;margin:8px 4px 4px}
-.sheet h3{margin:16px 2px 6px;font-size:15px;color:var(--acc);text-transform:uppercase;letter-spacing:.04em}
-.sheet ol,.sheet ul{margin:0;padding-left:22px}
-.sheet li{margin:7px 0}
-.sheet ul.bad li::marker{color:#ff6b6b}
-.sheet ul.good li::marker{color:var(--ok)}
-.tipbox{background:var(--card);border-left:4px solid var(--warn);border-radius:10px;padding:10px 12px;margin-top:16px;font-size:15px}
-textarea{width:100%;height:90px;background:var(--card2);color:var(--txt);border:0;border-radius:12px;padding:10px;font-size:13px;margin-top:8px}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="app"></div>
 <div id="timer"><button data-t="-15">−15</button><span class="tm" id="tm">0:00</span><button data-t="+15">+15</button><button data-t="skip">Pomiń</button></div>
 <nav>
-  <button data-tab="train"><span class="ic">🏋️</span>Trening</button>
-  <button data-tab="hist"><span class="ic">📈</span>Historia</button>
-  <button data-tab="set"><span class="ic">⚙️</span>Ustawienia</button>
+  <button data-tab="train"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></svg>Trening</button>
+  <button data-tab="hist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18M7 15l4-4 3 3 6-7"/></svg>Historia</button>
+  <button data-tab="set"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>Ustawienia</button>
 </nav>
 <div id="toast"></div>
 <div id="gm"></div>
@@ -120,7 +40,7 @@ const PLAN = {
     { id:"a_bp",  name:"Wyciskanie hantli – ławka płaska",sets:3, min:6,  max:10, step:2,   rest:120 },
     { id:"a_pu",  name:"Podciąganie / ściąganie drążka",  sets:3, min:6,  max:10, step:2.5, rest:120, bw:true },
     { id:"a_cur", name:"Uginanie ramion z hantlami",      sets:3, min:10, max:12, step:1,   rest:45,  grp:"S" },
-    { id:"a_tri", name:"Prostowanie ramion na wyciągu",   sets:3, min:10, max:12, step:2.5, rest:60,  grp:"S" },
+    { id:"a_tri", name:"Prostowanie ramion na wyciągu",   sets:3, min:10, max:12, step:2.5, rest:75,  grp:"S" },
     { id:"a_calf",name:"Wspięcia na palce (zgięte kolano)",sets:3,min:12, max:15, step:2,   rest:60,  leg:true, bw:true },
     { id:"a_db",  name:"Dead bug",                        sets:3, min:8,  max:8,  step:0,   rest:45,  bw:true, prog:false, side:true }
   ]},
@@ -132,7 +52,7 @@ const PLAN = {
     { id:"b_inc", name:"Wyciskanie hantli – ławka skośna",sets:3, min:8,  max:12, step:2,   rest:120 },
     { id:"b_row", name:"Wiosłowanie hantlem / na wyciągu",sets:3, min:8,  max:12, step:2.5, rest:90 },
     { id:"b_fp",  name:"Face pull",                       sets:3, min:12, max:15, step:2.5, rest:45,  grp:"S" },
-    { id:"b_lat", name:"Unoszenie hantli bokiem",         sets:3, min:12, max:15, step:1,   rest:60,  grp:"S" },
+    { id:"b_lat", name:"Unoszenie hantli bokiem",         sets:3, min:12, max:15, step:1,   rest:75,  grp:"S" },
     { id:"b_pal", name:"Pallof press",                    sets:3, min:10, max:10, step:2.5, rest:45,  side:true },
     { id:"b_kn",  name:"Unoszenie kolan w zwisie",        sets:3, min:10, max:10, step:0,   rest:60,  bw:true, prog:false }
   ]}
@@ -275,13 +195,12 @@ function toast(t){ const e=document.getElementById('toast'); e.textContent=t; e.
 function openGuide(id){
   const g=GUIDE[id], ex=EX[id], gm=document.getElementById('gm'); if(!g) return;
   const li=a=>a.map(x=>`<li>${x}</li>`).join('');
-  gm.innerHTML=`<div class="sheet"><div class="sh-hd"><b>${ex.name}</b><button data-close aria-label="Zamknij">✕</button></div>
+  gm.innerHTML=`<div class="sheet"><div class="grab"></div><div class="sh-hd"><b>${ex.name}</b><button data-close>Gotowe</button></div>
     <svg id="fig" viewBox="0 0 200 140"></svg><div class="cap">${g.cap}${g.hold?' (ćwiczenie izometryczne)':''}</div>
     <h3>Jak wykonać</h3><ol>${li(g.steps)}</ol>
     <h3>Pilnuj</h3><ul class="good">${li(g.cues)}</ul>
     <h3>Częste błędy</h3><ul class="bad">${li(g.mistakes)}</ul>
-    <div class="tipbox">💡 ${g.tip}</div>
-    <button class="big" data-close>Zamknij</button></div>`;
+    <h3>Wskazówka</h3><div class="tipbox">${g.tip}</div></div>`;
   gm.classList.add('on'); document.body.style.overflow='hidden';
   gmStop(); gmStart(g.anim,g.hold);
 }
@@ -305,7 +224,12 @@ document.addEventListener('click',e=>{
     }
     if(act==='chk'){
       const s=sets[i]; s.done=!s.done; row.classList.toggle('done',s.done);
-      if(s.done){ startTimer(ex.rest); keepAwake(); }
+      if(s.done){
+        // superseria: po pierwszym ćwiczeniu od razu następne, pełna przerwa dopiero po ostatnim
+        const list=PLAN[ui.day].ex, nx=list[list.findIndex(x=>x.id===ex.id)+1];
+        if(!(ex.grp&&nx&&nx.grp===ex.grp)) startTimer(ex.rest);
+        keepAwake();
+      }
       countDone(); save(); return;
     }
     if(act==='addset'){ const l=sets[sets.length-1]; sets.push({w:l?l.w:null,r:l?l.r:ex.min,done:false}); render(); return; }
