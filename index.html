@@ -13,7 +13,7 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
 <title>Trening siłowy</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 <div id="app"></div>
@@ -26,7 +26,7 @@
 <div id="toast"></div>
 <div id="gm"></div>
 
-<script src="guides.js"></script>
+<script src="guides.js?v=6"></script>
 <script>
 // ============ PLAN ============
 // sets: domyślna liczba serii | min/max: zakres powtórzeń (lub sekund) | step: skok obciążenia (kg)
@@ -130,7 +130,7 @@ function renderTrain(){
     const prev=day.ex[idx-1], first=ex.grp&&!(prev&&prev.grp===ex.grp);
     const h=lastFor(ex.id);
     const last=h?`Ostatnio (${dstr(h.date)}): `+h.sets.map(s=>`${s.w?fmt(s.w)+'×':''}${s.r}`).join(' · '):'Brak historii';
-    html+=`<div class="card ${ex.grp?(first?'grp gfirst':'grp'):''}" data-ex="${ex.id}">
+    html+=`${first?'<div class="ss">':''}<div class="card" data-ex="${ex.id}">
       ${first?'<span class="badge">SUPERSERIA</span>':''}
       <div class="hd"><b>${ex.name}</b><span class="tgt">${ex.sets}×${rangeOf(ex)}${ex.unit==='s'?' s':''}${ex.leg?' / nogę':''}${ex.side?' / stronę':''}</span></div>
       <div class="sug">${d.sug[ex.id]||''}</div><div class="lastrow"><div class="last">${last}</div>${GUIDE[ex.id]?'<button class="how" data-act="how">▶ Jak wykonać</button>':''}</div>
@@ -141,7 +141,7 @@ function renderTrain(){
         <input inputmode="numeric" data-f="r" value="${s.r==null?'':s.r}">
         <button class="chk" data-act="chk">✓</button></div>`).join('')}
       <div class="tools"><button data-act="addset">+ seria</button><button data-act="delset">− seria</button></div>
-    </div>`;
+    </div>${ex.grp&&!(day.ex[idx+1]&&day.ex[idx+1].grp===ex.grp)?'</div>':''}`;
   });
   html+=`<button class="big" data-act="finish">Zakończ trening</button><button class="sec" data-act="reset">Wyczyść bieżący trening</button>`;
   $app.innerHTML=html;

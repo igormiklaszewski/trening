@@ -43,8 +43,10 @@ h1{font-size:2rem;line-height:1.12;font-weight:700;letter-spacing:.01em;margin:.
 
 /* Karta ćwiczenia (inset grouped) */
 .card{background:var(--card);border-radius:.9rem;padding:.85rem .9rem .35rem;margin-bottom:.9rem}
-.card.grp{box-shadow:inset .3rem 0 0 var(--orange)}
-.card.gfirst{margin-bottom:.35rem}
+/* superseria: jedna klamra wokół całej grupy ćwiczeń */
+.ss{border-left:.3rem solid var(--orange);border-radius:.9rem 0 0 .9rem;padding-left:.6rem;margin-bottom:.9rem}
+.ss .card{margin-bottom:.45rem}
+.ss .card:last-child{margin-bottom:0}
 .hd{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem}
 .hd b{font-size:1.06rem;font-weight:600;line-height:1.2}
 .tgt{color:var(--label2);font-size:.85rem;white-space:nowrap}

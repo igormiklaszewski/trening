@@ -1,6 +1,6 @@
 // Network-first: aktualizacje wchodzą od razu, a offline działa z cache.
-const CACHE = 'trening-v5';
-const FILES = ['./', 'index.html', 'style.css', 'guides.js', 'manifest.json', 'icon-180.png', 'icon-512.png'];
+const CACHE = 'trening-v6';
+const FILES = ['./', 'index.html', 'style.css?v=6', 'guides.js?v=6', 'manifest.json', 'icon-180.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)));
