@@ -130,7 +130,7 @@ function renderTrain(){
     const prev=day.ex[idx-1], first=ex.grp&&!(prev&&prev.grp===ex.grp);
     const h=lastFor(ex.id);
     const last=h?`Ostatnio (${dstr(h.date)}): `+h.sets.map(s=>`${s.w?fmt(s.w)+'×':''}${s.r}`).join(' · '):'Brak historii';
-    html+=`<div class="card ${ex.grp?'grp':''}" data-ex="${ex.id}">
+    html+=`<div class="card ${ex.grp?(first?'grp gfirst':'grp'):''}" data-ex="${ex.id}">
       ${first?'<span class="badge">SUPERSERIA</span>':''}
       <div class="hd"><b>${ex.name}</b><span class="tgt">${ex.sets}×${rangeOf(ex)}${ex.unit==='s'?' s':''}${ex.leg?' / nogę':''}${ex.side?' / stronę':''}</span></div>
       <div class="sug">${d.sug[ex.id]||''}</div><div class="lastrow"><div class="last">${last}</div>${GUIDE[ex.id]?'<button class="how" data-act="how">▶ Jak wykonać</button>':''}</div>
