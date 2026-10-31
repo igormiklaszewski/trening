@@ -29,6 +29,9 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
 input,textarea{font:inherit;color:var(--label)}
 #app{max-width:560px;margin:0 auto;padding:max(.4rem,env(safe-area-inset-top)) .9rem calc(9rem + env(safe-area-inset-bottom))}
 
+/* Pasek statusu: treść przewija się pod rozmytym materiałem, nie pod zegarem */
+body::before{content:"";position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top);background:var(--mat);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);z-index:40}
+
 /* Duży tytuł */
 h1{font-size:2rem;line-height:1.12;font-weight:700;letter-spacing:.01em;margin:.5rem .2rem .8rem}
 
